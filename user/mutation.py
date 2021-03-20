@@ -35,13 +35,7 @@ class CreateUser(graphene.Mutation):
         if User.objects.filter(phone_number=kwargs["phone_number"]):
             raise GraphQLError("Already Exist Phone_Number")
 
-        user = User(
-            name=kwargs["name"],
-            birth=kwargs["birth"],
-            phone_number=kwargs["phone_number"],
-            account=kwargs["account"],
-            email=kwargs["email"],
-        )
+        user = User(**kwargs)
         user.set_password(kwargs["password"])
         user.save()
 
