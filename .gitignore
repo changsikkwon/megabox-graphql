@@ -262,7 +262,6 @@ Temporary Items
 [._]ss[a-gi-z]
 [._]sw[a-p]
 config.py
-.DS_Store
 
 # Session
 Session.vim
