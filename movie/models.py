@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import TimeStampedModel
+from user.utils import TimeStampedModel
 from django.utils.translation import gettext as _
 
 IMAGE_MAIN = 1

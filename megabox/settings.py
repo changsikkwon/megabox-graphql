@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    "graphene_django",
+    "user",
+    "movie",
+    "reservation",
 ]
 
 MIDDLEWARE = [
