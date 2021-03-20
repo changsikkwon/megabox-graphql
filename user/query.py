@@ -1,3 +1,5 @@
+import graphene
+
 from graphene_django.types import DjangoObjectType, ObjectType
 from .models import User, Like
 
@@ -13,4 +15,4 @@ class LikeType(DjangoObjectType):
 
 
 class Query(ObjectType):
-    pass
+    all_user = graphene.List(UserType)
