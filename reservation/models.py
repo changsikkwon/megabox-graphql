@@ -1,5 +1,5 @@
 from django.db import models
-from user.utils import TimeStampedModel
+from user.models import TimeStampedModel
 
 
 class Theater(models.Model):
@@ -7,8 +7,8 @@ class Theater(models.Model):
     city = models.ForeignKey("City", on_delete=models.CASCADE)
 
     class Meta:
-        db_table = "theater"
         ordering = ("name",)
+        db_table = "theater"
 
     def __str__(self):
         return self.name
