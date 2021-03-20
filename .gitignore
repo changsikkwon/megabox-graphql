@@ -261,6 +261,7 @@ Temporary Items
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
 [._]sw[a-p]
+config.py
 
 # Session
 Session.vim
