@@ -1,8 +1,7 @@
 import graphene
 import graphql_jwt
-import datetime
 
-from django.contrib.auth.hashers import make_password
+from graphql_jwt.shortcuts import create_refresh_token, get_token
 from graphql import GraphQLError
 from .validators import account_validation, password_validation, phone_number_validation
 from .query import UserType
@@ -10,6 +9,10 @@ from .models import User
 
 
 class CreateUser(graphene.Mutation):
+    user = graphene.Field(UserType)
+    token = graphene.String()
+    refresh_token = graphene.String()
+
     class Arguments:
         name = graphene.String(required=True)
         birth = graphene.Date(required=True)
@@ -17,8 +20,6 @@ class CreateUser(graphene.Mutation):
         account = graphene.String(required=True)
         password = graphene.String(required=True)
         email = graphene.String(required=True)
-
-    user = graphene.Field(lambda: UserType)
 
     def mutate(self, info, **kwargs):
         if not account_validation(kwargs["account"]):
@@ -39,15 +40,15 @@ class CreateUser(graphene.Mutation):
             birth=kwargs["birth"],
             phone_number=kwargs["phone_number"],
             account=kwargs["account"],
-            password=make_password(kwargs["password"]),
             email=kwargs["email"],
         )
+        user.set_password(kwargs["password"])
         user.save()
-        return CreateUser(user=user)
+
+        token = get_token(user)
+        refresh_token = create_refresh_token(user)
+        return CreateUser(user=user, token=token, refresh_token=refresh_token)
 
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
-    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
-    verify_token = graphql_jwt.Verify.Field()
-    refresh_token = graphql_jwt.Refresh.Field()
