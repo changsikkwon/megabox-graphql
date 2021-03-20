@@ -1,5 +1,5 @@
 from django.db import models
-from user.utils import TimeStampedModel
+from user.models import TimeStampedModel
 from django.utils.translation import gettext as _
 
 IMAGE_MAIN = 1
@@ -30,11 +30,11 @@ class Movie(TimeStampedModel):
     type = models.ManyToManyField("Type")
 
     class Meta:
-        db_table = "movie"
         ordering = (
             "-ticketing_rate",
             "title",
         )
+        db_table = "movie"
 
     def __str__(self):
         return self.title
