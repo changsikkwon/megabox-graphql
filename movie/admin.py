@@ -1,10 +1,12 @@
 from django.contrib import admin
-from .models import Reservation, ReservationItem, Theater, City, TheaterScreen, Screen, TicketType
+from .models import Movie, Image, Rating, AudienceRating, Tag, Actor, Director, Genre, Type
 
-admin.site.register(Reservation)
-admin.site.register(ReservationItem)
-admin.site.register(Theater)
-admin.site.register(City)
-admin.site.register(TheaterScreen)
-admin.site.register(Screen)
-admin.site.register(TicketType)
+admin.site.register(Movie)
+admin.site.register(Image)
+admin.site.register(Rating)
+admin.site.register(AudienceRating)
+admin.site.register(Tag)
+admin.site.register(Actor)
+admin.site.register(Director)
+admin.site.register(Genre)
+admin.site.register(Type)
