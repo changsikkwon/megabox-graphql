@@ -1,51 +1,68 @@
+from django.contrib.auth import models
+import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
-from .models import Movie, Image, Rating, Actor, AudienceRating, Director, Genre, Type, Tag
+from .models import (
+    IMAGE_SUB,
+    Movie,
+    Image,
+    Rating,
+    Actor,
+    AudienceRating,
+    Director,
+    Genre,
+    Type,
+    Tag,
+)
 
 
-class MovieType(DjangoObjectType):
+class MovieTp(DjangoObjectType):
     class Meta:
         model = Movie
 
 
-class ImageType(DjangoObjectType):
+class ImageTp(DjangoObjectType):
     class Meta:
         model = Image
 
 
-class RatingType(DjangoObjectType):
+class RatingTp(DjangoObjectType):
     class Meta:
         model = Rating
 
 
-class AudienceRatingType(DjangoObjectType):
+class AudienceRatingTp(DjangoObjectType):
     class Meta:
         model = AudienceRating
 
 
-class TagType(DjangoObjectType):
+class TagTp(DjangoObjectType):
     class Meta:
         model = Tag
 
 
-class ActorType(DjangoObjectType):
+class ActorTp(DjangoObjectType):
     class Meta:
         model = Actor
 
 
-class DirectorType(DjangoObjectType):
+class DirectorTp(DjangoObjectType):
     class Meta:
         model = Director
 
 
-class GenreType(DjangoObjectType):
+class GenreTp(DjangoObjectType):
     class Meta:
         model = Genre
 
 
-class TypeType(DjangoObjectType):
+class TypeTp(DjangoObjectType):
     class Meta:
         model = Type
 
 
 class Query(ObjectType):
-    pass
+    all_movie = graphene.List(MovieTp)
+
+    def resolve_all_movie(self, info):
+        # a = Movie.objects.filter(image=Image.objects.get(type=1))
+        return Movie.objects.all()
