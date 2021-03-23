@@ -1,5 +1,4 @@
 import graphene
-import graphql_jwt
 
 from graphql_jwt.shortcuts import create_refresh_token, get_token
 from graphql import GraphQLError
