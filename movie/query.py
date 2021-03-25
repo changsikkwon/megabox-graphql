@@ -21,8 +21,6 @@ class MovieTp(DjangoObjectType):
 class ImageTp(DjangoObjectType):
     class Meta:
         model = Image
-        # filter_fields = {"type": 1}
-        # interfaces = (relay.Node,)
 
 
 class RatingTp(DjangoObjectType):
