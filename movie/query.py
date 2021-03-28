@@ -21,10 +21,9 @@ class MovieTp(DjangoObjectType):
 
     def resolve_main_image(self, info):
         if Image.objects.filter(type=1, movie_id=self.id):
-            image = Image.objects.get(type=1, movie_id=self.id).url
+            return Image.objects.get(type=1, movie_id=self.id).url
         else:
-            image = None
-        return image
+            return None
 
 
 class ImageTp(DjangoObjectType):
