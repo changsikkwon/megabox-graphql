@@ -14,8 +14,17 @@ from .models import (
 
 
 class MovieTp(DjangoObjectType):
+    main_image = graphene.String()
+
     class Meta:
         model = Movie
+
+    def resolve_main_image(self, info):
+        if Image.objects.filter(type=1, movie_id=self.id):
+            image = Image.objects.get(type=1, movie_id=self.id).url
+        else:
+            image = None
+        return image
 
 
 class ImageTp(DjangoObjectType):
