@@ -93,6 +93,17 @@ class UpdateUser(graphene.Mutation):
         return UpdateUser(user=user, token=token, refresh_token=refresh_token)
 
 
+class DeleteUser(graphene.Mutation):
+    user = graphene.Field(graphene.String)
+
+    @login_required
+    def mutate(self, info):
+        user = User.objects.get(id=globals.user)
+        user.delete()
+        return DeleteUser()
+
+
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
     update_user = UpdateUser.Field()
+    delete_user = DeleteUser.Field()
