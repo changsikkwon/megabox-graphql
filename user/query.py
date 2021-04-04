@@ -15,7 +15,4 @@ class LikeType(DjangoObjectType):
 
 
 class Query(ObjectType):
-    all_user = graphene.List(UserType)
-    
-    def resolve_all_user(self, info):
-        return User.objects.all()
+    pass
